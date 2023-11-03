@@ -1,8 +1,8 @@
-public abstract class Staff extends Person{
+public abstract class Crew extends Person{
 
     private RankType rankType;
 
-    public Staff(String name, RankType rankType) {
+    public Crew(String name, RankType rankType) {
         super(name);
         this.rankType = rankType;
     }

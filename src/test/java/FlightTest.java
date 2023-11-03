@@ -4,6 +4,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class FlightTest {
 
@@ -13,40 +14,61 @@ public class FlightTest {
     Passenger passengerBob;
     Passenger passengerBill;
 
-    ArrayList<Pilot> pilotList;
-    ArrayList<CabinCrewMember> cabinCrew;
+    ArrayList<Crew> crewList;
     ArrayList<Passenger> passengerList;
 
 
-
-
     @Before
-    public void before(){
-        pilotRaymond = new Pilot("Raymond",RankType.CAPTAIN, "3476");
-        cabinCrewMemberDolly = new CabinCrewMember("Dolly",RankType.FLIGHTATTENDANT);
-        passengerBob = new Passenger("Bob",2);
-        passengerBill = new Passenger("Bill",3);
+    public void before() {
+        pilotRaymond = new Pilot("Raymond", RankType.CAPTAIN, "3476");
+        cabinCrewMemberDolly = new CabinCrewMember("Dolly", RankType.FLIGHTATTENDANT);
+        passengerBob = new Passenger("Bob", 2);
+        passengerBill = new Passenger("Bill", 3);
 
-        pilotList = new ArrayList<>();
-        cabinCrew = new ArrayList<>();
+        crewList = new ArrayList<>();
         passengerList = new ArrayList<>();
+        crewList.add(pilotRaymond);
+        crewList.add(cabinCrewMemberDolly);
+        flightPanam103 = new Flight(crewList,
+                passengerList,
+                PlaneType.AIRBUSA380,
+                "103",
+                "MAD",
+                "EDI",
+                "06:00");
+    }
 
-        pilotList.add(pilotRaymond);
-        cabinCrew.add(cabinCrewMemberDolly);
-        passengerList.add(passengerBob);
-        flightPanam103 = new Flight(pilotList,
-                                    cabinCrew,
-                                    passengerList,
-                                    PlaneType.AIRBUSA380,
-                                    "103",
-                                    "MAD",
-                                    "EDI",
-                                    "06:00");
+    @Test
+    public void hasPilot() {
+        assertTrue(flightPanam103.checkIfHasPilot());
     }
     @Test
-    public void hasPilot(){
-        assertEquals(1, flightPanam103.getNumberOfPilots());
+    public void hasEmptyPassengerList(){
+        assertEquals(0, flightPanam103.getNumberOfPassengersOnFlight());
     }
     @Test
-    public void has
+    public void hasPlane(){
+        assertEquals(PlaneType.AIRBUSA380, flightPanam103.getPlane());
+    }
+    @Test
+    public void hasFlightNumber(){
+        assertEquals("103", flightPanam103.getFlightNumber());
+    }
+    @Test
+    public void hasDestination(){
+        assertEquals("MAD", flightPanam103.getDestination());
+    }
+    @Test
+    public void hasDepartureAirport(){
+        assertEquals("EDI", flightPanam103.getDepartureAirport());
+    }
+    @Test
+    public void hasDepartureTime(){
+        assertEquals("06:00", flightPanam103.getDepartureTime());
+    }
+    @Test
+    public void hasAvailableSeats(){
+        flightPanam103.addPassengerToFlight(passengerBob);
+        assertEquals(699, flightPanam103.getNumberOfSeatsLeft());
+    }
 }

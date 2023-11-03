@@ -2,8 +2,7 @@ import java.util.ArrayList;
 
 public class Flight {
 
-    private ArrayList<Pilot> pilotList;
-    private ArrayList<CabinCrewMember> cabinCrew;
+    private ArrayList<Crew> crewList;
     private ArrayList<Passenger> passengerList;
     private PlaneType plane;
     private String flightNumber;
@@ -11,16 +10,14 @@ public class Flight {
     private String departureAirport;
     private String departureTime;
 
-    public Flight(ArrayList<Pilot> pilotList,
-                  ArrayList<CabinCrewMember> cabinCrew,
+    public Flight(ArrayList<Crew> crewList,
                   ArrayList<Passenger> passengerList,
                   PlaneType plane,
                   String flightNumber,
                   String destination,
                   String departureAirport,
                   String departureTime) {
-        this.pilotList = pilotList;
-        this.cabinCrew = cabinCrew;
+        this.crewList = crewList;
         this.passengerList = passengerList;
         this.plane = plane;
         this.flightNumber = flightNumber;
@@ -29,12 +26,8 @@ public class Flight {
         this.departureTime = departureTime;
     }
 
-    public ArrayList<Pilot> getPilotList() {
-        return pilotList;
-    }
-
-    public ArrayList<CabinCrewMember> getCabinCrew() {
-        return cabinCrew;
+    public ArrayList<Crew> getCrewList() {
+        return crewList;
     }
 
     public ArrayList<Passenger> getPassengerList() {
@@ -61,16 +54,33 @@ public class Flight {
         return departureTime;
     }
 
-    public void addPilot(Pilot pilot){
-        pilotList.add(pilot);
+    public void addCrew(Crew crew){
+        crewList.add(crew);
     }
-    public void addCrew(CabinCrewMember cabinCrewMember){
-        cabinCrew.add(cabinCrewMember);
+    public int getNumberOfCrew(){
+        return crewList.size();
     }
-    public void addPassenger(Passenger passenger){
-        passengerList.add(passenger);
+    public boolean checkIfHasPilot(){
+        for (Crew crew : crewList){
+            RankType rank = crew.getRankType();
+            if(rank == RankType.CAPTAIN || rank == RankType.FIRSTOFFICER){
+                return true;}
+            }
+                return false;
+        }
+
+    public int getNumberOfPassengersOnFlight(){
+        return passengerList.size();
     }
-    public int getNumberOfPilots(){
-        return pilotList.size();
+    public int getNumberOfSeatsLeft(){
+        return (plane.getCapacity())-(getNumberOfPassengersOnFlight());
     }
-}
+    public void addPassengerToFlight(Passenger passenger){
+        if(getNumberOfSeatsLeft() > 0) {
+            passengerList.add(passenger);
+        }
+    }
+
+
+    }
+
