@@ -1,13 +1,13 @@
 public abstract class Staff extends Person{
 
-    private String rank;
+    private RankType rankType;
 
-    public Staff(String name, String rank) {
+    public Staff(String name, RankType rankType) {
         super(name);
-        this.rank = rank;
+        this.rankType = rankType;
     }
 
-    public String getRank() {
-        return rank;
+    public RankType getRankType() {
+        return rankType;
     }
 }

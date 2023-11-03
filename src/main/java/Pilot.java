@@ -2,8 +2,8 @@ public class Pilot extends Staff{
 
     private String pilotLicenseNumber;
 
-    public Pilot(String name, String rank, String pilotLicenseNumber) {
-        super(name, rank);
+    public Pilot(String name, RankType rankType, String pilotLicenseNumber) {
+        super(name, rankType);
         this.pilotLicenseNumber = pilotLicenseNumber;
     }
 

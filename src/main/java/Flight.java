@@ -70,4 +70,7 @@ public class Flight {
     public void addPassenger(Passenger passenger){
         passengerList.add(passenger);
     }
+    public int getNumberOfPilots(){
+        return pilotList.size();
+    }
 }
