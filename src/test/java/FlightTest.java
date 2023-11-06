@@ -24,7 +24,6 @@ public class FlightTest {
         cabinCrewMemberDolly = new CabinCrewMember("Dolly", RankType.FLIGHTATTENDANT);
         passengerBob = new Passenger("Bob", 2);
         passengerBill = new Passenger("Bill", 3);
-
         crewList = new ArrayList<>();
         passengerList = new ArrayList<>();
         crewList.add(pilotRaymond);

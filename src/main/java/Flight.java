@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Flight {
 
@@ -9,6 +10,8 @@ public class Flight {
     private String destination;
     private String departureAirport;
     private String departureTime;
+
+    Random random = new Random();
 
     public Flight(ArrayList<Crew> crewList,
                   ArrayList<Passenger> passengerList,
@@ -75,10 +78,17 @@ public class Flight {
     public int getNumberOfSeatsLeft(){
         return (plane.getCapacity())-(getNumberOfPassengersOnFlight());
     }
+
+
     public void addPassengerToFlight(Passenger passenger){
         if(getNumberOfSeatsLeft() > 0) {
             passengerList.add(passenger);
         }
+
+        passenger.setFlight(this);
+
+        int randomNumber = random.nextInt(plane.getCapacity())+1;
+        passenger.setSeatNumber(randomNumber);
     }
 
 
